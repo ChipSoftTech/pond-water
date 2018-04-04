@@ -50,6 +50,12 @@ var initHttpServer = () => {
         connectToPeers([req.body.peer]);
         res.send();
     });
+    app.get('/ip', (req, res) => {
+        require('dns').lookup(require('os').hostname(), function (err, add, fam) {
+            console.log('addr: '+add);
+            res.send(JSON.stringify({'addr:':add}));
+          })
+    });
     app.listen(http_port, () => console.log('Listening http on port: ' + http_port));
 };
 
