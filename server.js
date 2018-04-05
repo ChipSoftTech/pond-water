@@ -53,7 +53,7 @@ var initHttpServer = () => {
     app.get('/ip', (req, res) => {
         require('dns').lookup(require('os').hostname(), function (err, add, fam) {
             console.log('addr: '+add);
-            res.send(JSON.stringify({'addr:':add}));
+            res.send(JSON.stringify({'IP:':add}));
           })
     });
     app.listen(http_port, () => console.log('Listening http on port: ' + http_port));
@@ -118,7 +118,7 @@ var calculateHashForBlock = (block) => {
 };
 
 var calculateHash = (index, previousHash, timestamp, data) => {
-    return CryptoJS.SHA256(index + previousHash + timestamp + data).toString();
+    return CryptoJS.SHA256(index + previousHash + timestamp + data).toString().toUpperCase();
 };
 
 var addBlock = (newBlock) => {
