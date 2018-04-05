@@ -26,7 +26,7 @@ var MessageType = {
 };
 
 var getGenesisBlock = () => {
-    return new Block(0, "0", 1465154705, "the genesis block", "x2mqz468qj99xx5au2s496vf532jte2nsnr3w7jp83hujr554zfhmhwh3cbxhzqd");
+    return new Block(0, "0", 1522924894, "the genesis block", "4C12F22597257E1A0E38377697F7EB4D0D54FD71387A00D680BE3366F33B20AF");
 };
 
 var blockchain = [getGenesisBlock()];
