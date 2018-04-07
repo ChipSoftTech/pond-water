@@ -5,26 +5,15 @@ services:
       restart: always
       context: ./
       dockerfile: Dockerfile
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s      
     ports:
     - "3001:3001"
   node2:
     environment:
       - PEERS=ws://node1:6001
     build:
+      restart: always    
       context: ./
       dockerfile: Dockerfile
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s      
     ports:
     - "3002:3001"
     links:
@@ -33,14 +22,9 @@ services:
     environment:
       - PEERS=ws://node2:6001
     build:
+      restart: always
       context: ./
       dockerfile: Dockerfile
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s      
     ports:
     - "3003:3001"
     links:
