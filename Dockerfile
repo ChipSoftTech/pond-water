@@ -1,12 +1,12 @@
 FROM node:4.6
 
-RUN mkdir /pondwater
-ADD package.json /pondwater/
-ADD server.js /pondwater/
+RUN mkdir /var/www/pondwater
+ADD package.json /var/www/pondwater/
+ADD server.js /var/www/pondwater/
 
-RUN cd /pondwater && npm install
+RUN cd /var/www/pondwater && npm install
 
 EXPOSE 3001
 EXPOSE 6001
 
-ENTRYPOINT cd /pondwater && npm install && PEERS=$PEERS npm start
+ENTRYPOINT cd /var/www/pondwater && npm install && PEERS=$PEERS npm start
