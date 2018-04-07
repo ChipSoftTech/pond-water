@@ -3,7 +3,7 @@ services:
   node1:
     build:
       restart: always
-      context: /var/www/pondwater
+      context: ./
       dockerfile: Dockerfile
     ports:
     - "3001:3001"
@@ -12,7 +12,7 @@ services:
       - PEERS=ws://node1:6001
     build:
       restart: always    
-      context: /var/www/pondwater
+      context: ./
       dockerfile: Dockerfile
     ports:
     - "3002:3001"
@@ -23,7 +23,7 @@ services:
       - PEERS=ws://node2:6001
     build:
       restart: always
-      context: /var/www/pondwater
+      context: ./
       dockerfile: Dockerfile
     ports:
     - "3003:3001"
