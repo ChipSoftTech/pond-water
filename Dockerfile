@@ -1,6 +1,7 @@
 FROM node:4.6
 
 # add contents to folder
+RUN mkdir /svr/www/pond-water
 ADD . / /svr/www/pond-water/
 
 RUN cd /srv/www/pond-water && npm install
