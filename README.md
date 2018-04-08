@@ -16,9 +16,9 @@ Check also [this blog post](https://xxxx) for a more detailed overview of the ke
 * No proof-of-work or proof-of-stake: a block can be added to the blockchain without competition
 
 
-![alt tag](pondwater_blockchain.png)
+![alt tag](public/img/pondwater_blockchain.png)
 
-![alt tag](pondwater_components.png)
+![alt tag](public/img/pondwater_components.png)
 
 
 ### Quick start
