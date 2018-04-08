@@ -1,4 +1,4 @@
-# pondwater - a blockchain datastore implementation
+# pond-water - a blockchain datastore implementation
 
 ### Motivation
 All the current implementations of blockchains are tightly coupled with the larger context and problems they (e.g. Bitcoin or Ethereum) are trying to solve. This project is an attempt to provide as concise and simple implementation of a blockchain datastore as possible.
@@ -7,7 +7,7 @@ All the current implementations of blockchains are tightly coupled with the larg
 ### What is blockchain
 [From Wikipedia](https://en.wikipedia.org/wiki/Blockchain_(database)) : Blockchain is a distributed database that maintains a continuously-growing list of records called blocks secured from tampering and revision.
 
-### Key concepts of pondwater
+### Key concepts of pond-water
 Check also [this blog post](https://xxxx) for a more detailed overview of the key concepts
 * HTTP interface to control the node
 * Use Websockets to communicate with other nodes (P2P)
@@ -16,9 +16,9 @@ Check also [this blog post](https://xxxx) for a more detailed overview of the ke
 * No proof-of-work or proof-of-stake: a block can be added to the blockchain without competition
 
 
-![alt tag](public/img/pondwater_blockchain.png)
+![alt tag](public/img/pond-water_blockchain.png)
 
-![alt tag](public/img/pondwater_components.png)
+![alt tag](public/img/pond-water_components.png)
 
 
 ### Quick start
