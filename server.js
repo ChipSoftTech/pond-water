@@ -3,6 +3,7 @@ var CryptoJS = require("crypto-js");
 var express = require("express");
 var bodyParser = require('body-parser');
 var WebSocket = require("ws");
+var tools = require('./functions/tools');
 
 var http_port = process.env.HTTP_PORT || 3001;
 var p2p_port = process.env.P2P_PORT || 6001;
@@ -51,14 +52,19 @@ var initHttpServer = () => {
         res.send();
     });
     app.get('/ip', (req, res) => {
-        require('dns').lookup(require('os').hostname(), function (err, add, fam) {
-            console.log('addr: '+add);
-            res.send(JSON.stringify({'IP:':add}));
-          })
+        res.send(tools.ip());
     });
+
+    app.get('/http_port', (req, res) => {
+        res.send({'http_port': http_port});        
+    })
+
+    app.get('/p2p_port', (req, res) => {
+        res.send({'p2p_port': p2p_port});        
+    })    
+
     app.listen(http_port, () => console.log('Listening http on port: ' + http_port));
 };
-
 
 var initP2PServer = () => {
     var server = new WebSocket.Server({
@@ -66,7 +72,6 @@ var initP2PServer = () => {
     });
     server.on('connection', ws => initConnection(ws));
     console.log('listening websocket p2p port on: ' + p2p_port);
-
 };
 
 var initConnection = (ws) => {
