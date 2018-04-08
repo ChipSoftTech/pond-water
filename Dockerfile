@@ -1,7 +1,9 @@
 FROM node:4.6
 
-# add contents to folder
-COPY ./ /srv/www/pondw-water/
+# add contents to folder in docker container
+RUN mkdir /srv/www
+RUN mkdir /srv/www/pondwater
+COPY ./ /srv/www/pond-water/
 
 RUN cd /srv/www/pond-water && npm install
 
