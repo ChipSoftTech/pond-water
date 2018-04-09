@@ -4,6 +4,7 @@ var express = require("express");
 var bodyParser = require('body-parser');
 var WebSocket = require("ws");
 var tools = require('./functions/tools');
+//const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn()
 
 var http_port = process.env.HTTP_PORT || 3001;
 var p2p_port = process.env.P2P_PORT || 6001;
@@ -35,6 +36,36 @@ var blockchain = [getGenesisBlock()];
 var initHttpServer = () => {
     var app = express();
     app.use(bodyParser.json());
+    app.use(express.static('public'))
+    app.use(require('express-favicon-short-circuit'));
+
+    app.use(require('express-status-monitor')({
+        title: 'Pond-Water Status',  // Default title
+        path: '/',
+        websocket: WebSocket,
+        //port: socketIoPort,
+        spans: [{
+          interval: 1,            // Every second
+          retention: 60           // Keep 60 datapoints in memory
+        }, {
+          interval: 5,            // Every 5 seconds
+          retention: 60
+        }, {
+          interval: 15,           // Every 15 seconds
+          retention: 60
+        }],
+        chartVisibility: {
+          cpu: true,
+          mem: true,
+          load: true,
+          responseTime: true,
+          rps: true,
+          statusCodes: true
+        }
+      }));
+
+    // route throwing requested status code - good for healthcheck
+    app.get('/return-status/:statusCode', (req, res) => res.sendStatus(req.params.statusCode));      
 
     app.get('/blocks', (req, res) => res.send(JSON.stringify(blockchain)));
     app.post('/mineBlock', (req, res) => {
@@ -56,12 +87,16 @@ var initHttpServer = () => {
     });
 
     app.get('/http_port', (req, res) => {
-        res.send({'http_port': http_port});        
+        res.send({
+            'http_port': http_port
+        });
     })
 
     app.get('/p2p_port', (req, res) => {
-        res.send({'p2p_port': p2p_port});        
-    })    
+        res.send({
+            'p2p_port': p2p_port
+        });
+    })
 
     app.listen(http_port, () => console.log('Listening http on port: ' + http_port));
 };
@@ -116,7 +151,6 @@ var generateNextBlock = (blockData) => {
     var nextHash = calculateHash(nextIndex, previousBlock.hash, nextTimestamp, blockData);
     return new Block(nextIndex, previousBlock.hash, nextTimestamp, blockData, nextHash);
 };
-
 
 var calculateHashForBlock = (block) => {
     return calculateHash(block.index, block.previousHash, block.timestamp, block.data);
