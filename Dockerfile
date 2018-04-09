@@ -2,7 +2,7 @@ FROM node:7
 WORKDIR /app
 
 # add contents to folder in docker container
-RUN mkdir /app
+#RUN mkdir /app
 RUN mkdir /app/pondwater
 COPY ./ /app/pond-water/
 
